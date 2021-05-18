@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import pickle
+import numpy as np
 from pathlib import Path
 
 def get_interval(UTC_time):
@@ -8,13 +9,11 @@ def get_interval(UTC_time):
     
 
 def get_historic(city, UTC_time, month, conf):
-    #time 0-23 #month 1-12
-    # MeteoBlue = pd.read_csv(Path('Materials/MeteoBlue_basic-weather-variables-only/dataexport_20210401T200237_lo-res.csv'))
-    # city = MeteoBlue[['location','Amsterdam']][9:]
-    # city['location'] = city['location'].apply(lambda x: pd.to_datetime(str(x), format='%Y%m%dT%H%M'))
     file = open('Extracted/{}.pk'.format(city),'rb')
     data = pickle.load(file)
     points = data.loc[(data.index.hour==UTC_time) & (data.index.month==month)]
+    if(conf=='mean'):
+        return np.mean(points)
     lower = points[city].quantile(round((1-conf)/2,3))
     higher = points[city].quantile(round(1-(1-conf)/2,3))
     return [lower,higher]
