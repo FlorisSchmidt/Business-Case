@@ -32,3 +32,5 @@ remaped = {
     'Lima':'LIM',
     'Jorge Chávez International Airport':'LIM'
 }
+
+high = ['AMS','BRU','BSL','DXB','FRA','HYD','JNB','LIM','ORD','PVG','SCL']
