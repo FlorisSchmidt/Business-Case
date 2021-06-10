@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from numpy.core.einsumfunc import _compute_size_by_dict
 import pandas as pd
 import cityRemap
 
@@ -25,8 +24,8 @@ def extract_city(i,high,low):
     high_city,city_name = clean_mtb(high,i)
     low_city,city_name = clean_mtb(low,i)
 
-    high_city = high_city.rename({'Temperature sfc':'Temperature'},axis='columns')
-    low_city = low_city.rename({'Temperature sfc':'Temperature'},axis='columns')
+    high_city = high_city.rename({'Temperature sfc':'Temperature','temp':'Temperature'},axis='columns')
+    low_city = low_city.rename({'Temperature sfc':'Temperature','temp':'Temperature'},axis='columns')
     if ('Temperature' not in high_city.columns):
         high_city = high_city.rename({'Temperature 2 m elevation corrected':'Temperature'},axis='columns')
         low_city = low_city.rename({'Temperature 2 m elevation corrected':'Temperature'},axis='columns')
