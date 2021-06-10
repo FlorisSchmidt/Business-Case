@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from numpy.core.einsumfunc import _compute_size_by_dict
 import pandas as pd
 import cityRemap
 
@@ -8,7 +9,6 @@ if not os.path.isdir('extracted'):
         os.makedirs(Path('extracted/high/'))
         os.makedirs(Path('extracted/combined/'))
         os.makedirs(Path('extracted/owm/'))
-
 
 def clean_mtb(data,i):
     city = data.iloc[:,[i]].columns[0]
@@ -27,8 +27,13 @@ def extract_city(i,high,low):
 
     high_city = high_city.rename({'Temperature sfc':'Temperature'},axis='columns')
     low_city = low_city.rename({'Temperature sfc':'Temperature'},axis='columns')
+    if ('Temperature' not in high_city.columns):
+        high_city = high_city.rename({'Temperature 2 m elevation corrected':'Temperature'},axis='columns')
+        low_city = low_city.rename({'Temperature 2 m elevation corrected':'Temperature'},axis='columns')
     high_city.index.names = ['dt']
     low_city.index.names = ['dt']
+    high_city = high_city[pd.notnull(high_city['Temperature'])]
+    low_city = low_city[pd.notnull(low_city['Temperature'])]
 
     high_city.to_csv(Path('extracted/high/{}.csv'.format(cityRemap.remaped.get(city_name))))
     low_city.to_csv(Path('extracted/low/{}.csv'.format(cityRemap.remaped.get(city_name))))
