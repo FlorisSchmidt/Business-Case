@@ -24,8 +24,8 @@ def extract_city(i,high,low):
     high_city,city_name = clean_mtb(high,i)
     low_city,city_name = clean_mtb(low,i)
 
-    high_city = high_city.rename({'Temperature sfc':'Temperature','temp':'Temperature'},axis='columns')
-    low_city = low_city.rename({'Temperature sfc':'Temperature','temp':'Temperature'},axis='columns')
+    high_city = high_city.rename({'Temperature sfc':'Temperature'},axis='columns')
+    low_city = low_city.rename({'Temperature sfc':'Temperature'},axis='columns')
     if ('Temperature' not in high_city.columns):
         high_city = high_city.rename({'Temperature 2 m elevation corrected':'Temperature'},axis='columns')
         low_city = low_city.rename({'Temperature 2 m elevation corrected':'Temperature'},axis='columns')
@@ -77,5 +77,5 @@ for file in all_csv_files:
     city = city.set_index('dt')
     city_name = city['city_name'][0]
     city = city.drop(columns=['lat','lon','weather_icon','dt_iso','timezone','city_name','weather_id','weather_main','weather_description'])
-    city.rename({'temp':'Temperature'})
+    city = city.rename({'temp':'Temperature'},axis='columns')
     city.to_csv(Path('extracted/owm/{}.csv'.format(cityRemap.remaped.get(city_name))))
