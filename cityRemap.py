@@ -19,8 +19,8 @@ remaped = {
     'Hong Kong International Airport':'HKG',
     'Tokyo Narita':'NRT',
     'Narita International Airport':'NRT',
-    'San Francisco':'BSL',
-    'San Francisco International Airport':'BSL',
+    'San Francisco':'SFO',
+    'San Francisco International Airport':'SFO',
     'Chicago':'ORD',
     "Chicago O'Hare International Airport":'ORD',
     'Sydney':'SYD',
@@ -33,4 +33,4 @@ remaped = {
     'Jorge Chávez International Airport':'LIM'
 }
 
-high = ['AMS','BRU','BSL','DXB','FRA','HYD','JNB','LIM','ORD','PVG','SCL']
+mtb = ['AMS','BRU','BSL','DXB','FRA','HYD','JNB','LIM','ORD','PVG','SCL']
