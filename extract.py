@@ -76,9 +76,9 @@ all_csv_files = [file
 for file in all_csv_files:
     city = pd.read_csv(file)
     city.dt = city.dt.astype('datetime64[s]')
+    city = city.drop_duplicates(subset=['dt'])
     city = city.set_index('dt')
     city_name = city['city_name'][0]
     city = city.drop(columns=['lat','lon','weather_icon','dt_iso','timezone','city_name','weather_id','weather_main','weather_description'])
     city = city.rename({'temp':'Temperature'},axis='columns')
-    city = city.drop_duplicates(subset=['Temperature'])
     city.to_csv(Path('extracted/owm/{}.csv'.format(cityRemap.remaped.get(city_name))))
