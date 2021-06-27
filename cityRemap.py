@@ -1,3 +1,5 @@
+import pandas as pd
+
 remaped = {
     'Frankfurt':'FRA',
     'Frankfurt am Main':'FRA',
@@ -34,3 +36,24 @@ remaped = {
 }
 
 mtb = ['AMS','BRU','BSL','DXB','FRA','HYD','JNB','LIM','ORD','PVG','SCL']
+owm = ['HKG','NRT','SFO','SIN','SYD','ZRH']
+
+month = {
+    0:'JAN',
+    1:'FEB',
+    2:'MAR',
+    3:'APR',
+    4:'MAY',
+    5:'JUN',
+    6:'JUL',
+    7:'AUG',
+    8:'SEP',
+    9:'OCT',
+    10:'NOV',
+    11:'DEC'
+}
+
+date_index=pd.DataFrame()
+for current_month in range(12):
+    for hour in range(24):
+        date_index = date_index.append({'Date':'{} {}'.format(month.get(current_month),hour)},ignore_index=True)
